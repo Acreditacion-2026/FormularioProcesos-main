@@ -556,6 +556,12 @@ input[type="checkbox"] {
     background: rgb(255 255 255 / 90%);
 }
 
+.acciones-botones {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+}
+
 button {
     min-height: 36px;
     padding: 8px 14px;
@@ -587,6 +593,24 @@ button:focus-visible {
     border: 1px solid #b8ccdc;
     background: #fff;
     color: var(--navy);
+}
+
+.button-exportar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #173b61, #245780);
+}
+
+.button-exportar svg {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
 }
 
 .contador-visitas {
@@ -807,7 +831,156 @@ button:focus-visible {
         flex-direction: column-reverse;
     }
 
-    .acciones button {
+    .acciones-botones {
         width: 100%;
+        flex-direction: column;
+        margin-left: 0;
+    }
+
+    .acciones-botones button {
+        width: 100%;
+    }
+}
+
+@page {
+    size: A4 landscape;
+    margin: 10mm;
+}
+
+@media print {
+    :root,
+    body {
+        background: #fff;
+        color: #243b53;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .site-header {
+        background: #173b61 !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .site-header::after,
+    .progress-nav,
+    .acciones {
+        display: none !important;
+    }
+
+    .site-header__content {
+        width: 100%;
+        min-height: 92px;
+        gap: 20px;
+        padding: 10px 0;
+    }
+
+    .logo-usil {
+        width: 64px;
+        height: 64px;
+    }
+
+    .logo-deac {
+        width: 112px;
+    }
+
+    .header-copy h1 {
+        font-size: 1.35rem;
+    }
+
+    .header-copy > p:last-child {
+        margin-top: 4px;
+        font-size: 0.68rem;
+    }
+
+    .page-content {
+        width: 100%;
+        margin: 10px 0 0;
+    }
+
+    .calculator-layout {
+        grid-template-columns: minmax(0, 1.65fr) minmax(300px, 0.9fr);
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .stages {
+        gap: 7px;
+    }
+
+    .etapa,
+    .resumen {
+        padding: 10px 12px;
+        border-color: #cbd8e3;
+        box-shadow: none;
+        break-inside: avoid;
+    }
+
+    .section-heading {
+        margin-bottom: 8px;
+        padding-bottom: 7px;
+    }
+
+    .section-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .form-grid {
+        row-gap: 0;
+    }
+
+    .campo {
+        margin-bottom: 6px;
+    }
+
+    .mensaje-info,
+    .mensaje-aviso {
+        margin-top: 6px;
+        padding: 7px 9px;
+    }
+
+    .resumen {
+        position: static;
+    }
+
+    .resumen-heading {
+        margin-bottom: 8px;
+    }
+
+    .resumen-etapa {
+        display: block;
+        width: auto;
+        margin-bottom: 6px;
+        padding: 8px 9px;
+    }
+
+    .resumen-linea {
+        min-height: 0;
+        align-items: baseline;
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .resumen-total {
+        margin-top: 8px;
+        padding: 9px;
+    }
+
+    .total-values input {
+        font-size: 1.05rem;
+    }
+
+    input,
+    select {
+        color: #243b53 !important;
+        opacity: 1 !important;
+        -webkit-text-fill-color: #243b53;
+    }
+
+    input:disabled,
+    select:disabled,
+    .sedes:disabled {
+        opacity: 1;
     }
 }

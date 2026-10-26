@@ -9,6 +9,7 @@ const costoCursos = document.getElementById("costo-cursos");
 const costoRevision = document.getElementById("costo-revision");
 const costoVisita = document.getElementById("costo-visita");
 const otraConsulta = document.getElementById("otraConsulta");
+const exportar = document.getElementById("exportar");
 const codigoProceso = document.getElementById("codigo-proceso");
 const costoBase = document.getElementById("costo-base-proceso");
 const costoEtapa1 = document.getElementById("costo-etapa1");
@@ -69,6 +70,24 @@ function actualizarOpcionesCantidad() {
     for (let numero = 0; numero <= maximo; numero += 1) {
         cantidad.add(new Option(String(numero), String(numero)));
     }
+}
+
+function actualizarDisponibilidadSedes() {
+    const sedeDistancia = sedes.querySelector("#sede-distancia");
+    const sedesLocales = sedes.querySelectorAll('input[type="checkbox"]:not(#sede-distancia)');
+    const haySedeLocalSeleccionada = [...sedesLocales].some((sede) => sede.checked);
+
+    sedeDistancia.disabled = haySedeLocalSeleccionada;
+    sedesLocales.forEach((sede) => {
+        sede.disabled = sedeDistancia.checked;
+    });
+}
+
+function limpiarSedes() {
+    sedes.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+        checkbox.checked = false;
+    });
+    actualizarDisponibilidadSedes();
 }
 
 function actualizarCostoEtapa1() {
@@ -158,9 +177,7 @@ proceso.addEventListener("change", () => {
         tipo.add(new Option("Nuevo programa", "nuevo-programa"));
         tipo.add(new Option("Nueva sede", "nueva-sede"));
     } else if (esMenor) {
-        sedes.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
-            checkbox.checked = false;
-        });
+        limpiarSedes();
         tipo.add(new Option("Rediseño no sustantivo", "rediseno-no-sustantivo"));
         tipo.value = "rediseno-no-sustantivo";
         tipo.dispatchEvent(new Event("change"));
@@ -172,15 +189,20 @@ tipo.addEventListener("change", () => {
     costoBase.textContent = costosBasePorTipo[tipo.value] || "";
     const esNuevaSede = tipo.value === "nueva-sede";
     if (esNuevaSede) {
-        sedes.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
-            checkbox.checked = false;
-        });
+        limpiarSedes();
     }
     sedes.disabled = proceso.value !== "mayor" || esNuevaSede;
     actualizarCostoEtapa1();
 });
 
-sedes.addEventListener("change", actualizarCostoEtapa1);
+sedes.addEventListener("change", () => {
+    actualizarDisponibilidadSedes();
+    actualizarCostoEtapa1();
+});
+
+exportar.addEventListener("click", () => {
+    window.print();
+});
 
 otraConsulta.addEventListener("click", () => {
     proceso.value = "";
@@ -201,9 +223,7 @@ otraConsulta.addEventListener("click", () => {
     costoRevision.value = costoRevision.defaultValue;
     actualizarCostoEtapa2();
 
-    sedes.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
-        checkbox.checked = false;
-    });
+    limpiarSedes();
     actualizarCostosTotales();
 });
 

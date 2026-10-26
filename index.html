@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#173b61">
-    <title>Calculadora de Costos de Procesos DEAC...</title>
+    <title>Calculadora de Costos de Procesos DEAC</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -92,7 +92,10 @@
                     <p class="costo-base"><strong>Costo base:</strong> <span id="costo-base-proceso" aria-live="polite"></span></p>
 
                     <fieldset class="campo sedes" disabled>
-                        <legend>Sedes en las que se dictará el programa</legend>
+                        <legend>Si el programa contempla algún nivel de presencialidad, seleccione la(s) sede(s) correspondiente(s). Si es exclusivamente a distancia, marque únicamente «A Distancia»</legend>
+                        <label class="sede-opcion" for="sede-arequipa">
+                            <input type="checkbox" id="sede-arequipa" name="arequipa" value="arequipa"> Arequipa
+                        </label>
                         <label class="sede-opcion" for="sede-molina">
                             <input type="checkbox" id="sede-molina" name="molina" value="molina"> La Molina
                         </label>
@@ -195,7 +198,12 @@
                     </div>
                 </div>
                 <p class="mensaje-info"><span aria-hidden="true">i</span><span>Los montos son referenciales y corresponden a una estimación del costo del proceso.</span></p>
-                <p class="mensaje-aviso"><strong>Importante</strong><span>El costo final puede variar según la complejidad del proceso, el número de cursos y sedes, así como otros factores específicos de cada solicitud.</span></p>
+                <p class="mensaje-aviso"><strong>Importante</strong>
+                    <span>1. El costo final puede variar según la complejidad del proceso, el número de cursos y sedes, 
+                        así como otros factores específicos de cada solicitud.</span>
+                    <span>2. El tipo de cambio está sujeto a lo establecido por Finanzas.</span>
+                    <span>3. 1.Los costos son dados por DEAC en su último registro de tasas (Acreditattion Fees).</span>
+                </p>    
             </aside>
         </div>
 
@@ -203,8 +211,16 @@
             <div class="contador-visitas" hidden>
                 <span aria-hidden="true">◉</span> Visitas: <span id="visitas">...</span>
             </div>
-            <button type="button" id="otraConsulta" class="button-secondary">Realizar otra consulta</button>
-            <p style="font-size: 0.9em; color: black;">By: Dirección General de Acreditación</p>
+            <div class="acciones-botones">
+                <button type="button" id="exportar" class="button-exportar">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                        <path d="M12 3v11m0 0 4-4m-4 4-4-4M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4" />
+                    </svg>
+                    Exportar
+                </button>
+                <button type="button" id="otraConsulta" class="button-secondary">Realizar otra consulta</button>
+            </div>
+            <p style="font-size: 0.9em; color: black;">By: Elaborado por: Dirección General de Acreditación</p>
         </footer>
     </main>
 
