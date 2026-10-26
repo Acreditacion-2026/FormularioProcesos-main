@@ -547,7 +547,7 @@ input[type="checkbox"] {
 .acciones {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 12px;
     margin-top: 14px;
     padding: 9px 12px;
@@ -559,6 +559,9 @@ input[type="checkbox"] {
 .acciones-botones {
     display: flex;
     gap: 8px;
+}
+
+.acciones > p {
     margin-left: auto;
 }
 
@@ -899,13 +902,11 @@ button:focus-visible {
     }
 
     .calculator-layout {
-        grid-template-columns: minmax(0, 1.65fr) minmax(300px, 0.9fr);
-        align-items: stretch;
-        gap: 10px;
+        display: block;
     }
 
     .stages {
-        gap: 7px;
+        display: block;
     }
 
     .etapa,
@@ -914,6 +915,11 @@ button:focus-visible {
         border-color: #cbd8e3;
         box-shadow: none;
         break-inside: avoid;
+    }
+
+    #etapa-3 {
+        break-before: page;
+        page-break-before: always;
     }
 
     .section-heading {
@@ -942,17 +948,28 @@ button:focus-visible {
 
     .resumen {
         position: static;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+    .resumen-heading,
+    .resumen-total,
+    .resumen > .mensaje-info,
+    .resumen > .mensaje-aviso {
+        grid-column: 1 / -1;
     }
 
     .resumen-heading {
-        margin-bottom: 8px;
+        margin-bottom: 0;
     }
 
     .resumen-etapa {
         display: block;
         width: auto;
-        margin-bottom: 6px;
-        padding: 8px 9px;
+        margin: 0;
+        padding: 7px 8px;
     }
 
     .resumen-linea {
